@@ -51,7 +51,7 @@ tex:	clean $(TEX)
 docx:	clean $(DOCX)
 
 %.md: %.Rmd
-	R --slave -e "set.seed(100);knitr::knit('$<')"
+	R --no-echo -e "set.seed(100);knitr::knit('$<')"
 
 %.html:	%.md
 	pandoc -r $(OPTIONS) -w html  --template=$(PREFIX)/templates/html.template --css=$(PREFIX)/marked/kultiad-serif.css --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
